@@ -1,5 +1,4 @@
 import express from 'express';
-import morgan from 'morgan';
 
 import fs from 'fs';
 
@@ -7,7 +6,6 @@ const port: string = '8080';
 const app = express();
 
 app.use(express.static('static'));
-// app.use(morgan('common'));
 app.use(express.json())
 
 enum Buttons {
