@@ -1,37 +1,32 @@
-let plus = document.getElementById('plus')
-let minus = document.getElementById('minus')
+const plusButton = document.getElementById('plus')
+const minusButton = document.getElementById('minus')
+const plusDiv = document.getElementById('plus_div')
+const minusDiv = document.getElementById('minus_div')
 
 const apiURL = 'http://localhost:8080/'
 
-if (plus != null) {
-    plus.onclick = (plus) => {
-        const route = 'plus';
-        const qs = {action: route};
-        fetch(apiURL + route + '?' + new URLSearchParams(qs), {
-            method: 'POST',
-            body: JSON.stringify({test: 'plus some text'}),
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(res => res.json())
-            .then((value) => console.log(value))
+enum Buttons {
+    PLUS,
+    MINUS
+}
+
+if (plusDiv != null && minusDiv != null) {
+    if (plusButton != null) {
+        plusButton.onclick = () => button(Buttons.PLUS, plusDiv);
+    }
+    if (minusButton != null) {
+        minusButton.onclick = () => button(Buttons.MINUS, minusDiv);
     }
 }
-if (minus != null) {
-    minus.onclick = (minus) => {
-        const route = 'minus';
-        const qs = {action: route};
-        fetch(apiURL + route + '?' + new URLSearchParams(qs), {
-            method: 'POST',
-            body: JSON.stringify({test: 'minus some text'}),
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(res => res.json())
-            .then((value) => console.log(value))
-    }
+
+function button(value: Buttons, div: HTMLElement) {
+    fetch(apiURL + "button", {
+        method: 'POST',
+        body: JSON.stringify({ button: value }),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(res => res.json())
+        .then((val) => div.innerText = ": " + val.button + " times");
 }

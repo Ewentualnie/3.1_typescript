@@ -19,5 +19,3 @@ type ConfirmationHandlingFormButton = {onConfirm?: (button: DialogButtonType)=> 
 
 // .... НЕТ, не надо писать все эти диалоги формы кнопки, 
 // мы описываем чисто типы сейчас.
-
-let button: AnyButtonType = "Yes";

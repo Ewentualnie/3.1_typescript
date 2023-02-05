@@ -7,18 +7,31 @@ const port: string = '8080';
 const app = express();
 
 app.use(express.static('static'));
-app.use(morgan('common'));
+// app.use(morgan('common'));
 app.use(express.json())
 
+enum Buttons {
+    PLUS,
+    MINUS
+}
+let plus: number = 0,
+    minus: number = 0;
 
-app.post('/plus', (req, res) => {
-    console.log(req.body);
-    res.send(JSON.stringify({ok: true}));
-}).post('/minus', (req, res) => {
-    console.log(req.body);
-    res.send(JSON.stringify({ok: true}));
-}).get('/dist/front.js', (req, res) => {
+app.get('/front.js', (req, res) => {
     fs.readFile('./dist/front.js', 'utf-8', (err, data) => res.send(data))
+}).post('/button', (req, res) => {
+    switch (req.body.button) {
+        case Buttons.PLUS:
+            plus++;
+            res.send(JSON.stringify({ button: plus }));
+            break;
+        case Buttons.MINUS:
+            minus++;
+            res.send(JSON.stringify({ button: minus }));
+            break;
+        default:
+            break;
+    }
 })
 
 
