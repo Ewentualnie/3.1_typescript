@@ -1,5 +1,4 @@
 import express from 'express';
-
 import fs from 'fs';
 
 const port: string = '8080';
@@ -20,14 +19,10 @@ app.get('/front.js', (req, res) => {
 }).post('/button', (req, res) => {
     switch (req.body.button) {
         case Buttons.PLUS:
-            plus++;
-            res.send(JSON.stringify({ button: plus }));
+            res.send(JSON.stringify({ button: ++plus }));
             break;
         case Buttons.MINUS:
-            minus++;
-            res.send(JSON.stringify({ button: minus }));
-            break;
-        default:
+            res.send(JSON.stringify({ button: ++minus }));
             break;
     }
 })
