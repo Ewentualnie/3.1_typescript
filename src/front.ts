@@ -28,5 +28,5 @@ function button(value: Buttons, div: HTMLElement) {
         },
     })
         .then(res => res.json())
-        .then((val) => div.innerText = ": " + val.button + " times");
+        .then(val => div.innerText = `${value ? 'minus entered' : 'plus entered'} ${val.button} times`);
 }
