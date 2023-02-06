@@ -1,12 +1,9 @@
-interface objectA {
-    [value: string]: { cvalue: undefined | string | number | objectA } | undefined
-}
-function g(value: objectA) {
-    let  sum = Object.values(value)
-    
-    console.log(sum);
-    
-    return 2022;
-}
-
-g({ key: { cvalue: 5 }, str: { cvalue: 'ololo' } })
+type objectA = { [value: string]: { cvalue: undefined | string | number | objectA } | undefined }
+const funk = (value: objectA): number =>
+    Object.values(value).map(val => {
+        let element = val?.cvalue
+        if (typeof element == 'number') return element
+        if (typeof element == 'string') return element == '0' ? 0 : +element || 2022;
+        if (typeof element == 'undefined') return 2022;
+        return funk(element)
+    }).reduce((first, next) => first + next);
