@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
+    "test" : "rm -rf ./dist && tsc && node dist/functions.js",
     "restart": "rm -rf ./dist && tsc && node dist/index.js"
   },
   "repository": {
