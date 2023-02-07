@@ -7,3 +7,10 @@ const funk = (value: objectA): number =>
         if (typeof element == 'undefined') return 2022;
         return funk(element)
     }).reduce((first, next) => first + next);
+
+
+function mapObject<input, output>(obj: Record<string, input>, transformer: (param: input) => output): Record<string, output> {
+    return Object.fromEntries(
+        Object.entries(obj).map(([key, value]) => [key, transformer(value)])
+    )
+}
